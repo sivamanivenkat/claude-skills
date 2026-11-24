@@ -48,7 +48,7 @@ If the user supplies their own target tree, it overrides the mappings.
 3. **Plan, then stop for approval.** List the components and each one's mapping. Show one table per component: current path | target path | action (move/rename/split/keep/delete-candidate/unsure) | reason. List empty layers (scaffold or not), unplaceable files, and risks (dynamic imports, scan roots, path aliases, Docker/CI paths). Move nothing until the plan is approved. Splits, renames and deletions each need explicit approval, because they change more than file locations.
 4. **Execute** on branch `restructure/layered-architecture`. Use `git mv` for every move so history follows the files. Fix references as discovery.md describes. Update Dockerfiles, compose files, CI and scripts. Move split code verbatim. Scaffold only approved layers, as stubs with a signature, a doc comment and a TODO. Commit in steps (moves, references, scaffolding, docs) so each step can be reviewed or reverted alone.
 5. **Docs and agent context.** Write CLAUDE.md and AGENTS.md (layer map, commands, where new code goes) and `.claude/rules/code-style.md` and `testing.md` derived from the repo's actual tooling. Write `docs/architecture.md` with a Mermaid diagram of the main request flow. Update the README rather than replacing it.
-6. **Verify** each component with its own commands and build Docker images if available. Compare against that component's baseline. Fix only breakages the move caused; failures already in the baseline stay and are reported.
+6. **Verify** by following [references/verify.md](references/verify.md): a mechanical audit, each component's own commands compared against its baseline, and an independent review, so the agent that moved the files isn't the only one grading them. Fix only breakages the move caused; failures already in the baseline stay and are reported.
 7. **Report** using the template below.
 
 ## Report template
@@ -58,6 +58,7 @@ If the user supplies their own target tree, it overrides the mappings.
 Components: <name – stack – mapping used>, ...
 Moved / split / scaffolded: <counts and notable items per component>
 Verification vs baseline: <per component: before → after>
+Audit and independent review: <lines from verify.md>
 Pre-existing failures (untouched): <list or none>
 Unplaced or risky items: <list or none>
 Review: git diff main --stat      Undo: delete branch restructure/layered-architecture
