@@ -11,7 +11,7 @@ Personal collection of [Claude Code](https://claude.com/claude-code) skills.
 Copy or clone the skill folder into a Claude Code skills directory, then start a new session.
 
 ```powershell
-git clone https://github.com/<user>/claude-skills.git
+git clone https://github.com/sivamanivenkat/claude-skills.git
 # personal (all projects)
 Copy-Item -Recurse claude-skills\repo-restructure "$env:USERPROFILE\.claude\skills\repo-restructure"
 # or one project only
